@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "5968dd23fc13ae04d9000001"
+  },
+  "gchurcha_date": "xxxxxxxxxxx",
+  "guest_speaker": "xxxxxxxxxxx",
+  "liked_most": 'xxxxxxxxxxxxxx',
+  "wish_list_gspeaker": "xxxxxxxxx"
+}]
+
+Task A ) IaC - Next Friday - code should be ready - using Teraform - AWS  - (Sunil ji/Kapil ji)
+              MongoDB - a separate task - using DocumentDB / NoSQL (sanjay, Pawan ji)
+Task B ) Next - Friday - Data Model - Json files / Keyvalue pairs, database selection (Pawan ji) 
+              (no-sql - mongodb, cassandra)
+Task C) July 24th - 1st screen - Simple Guru Churcha feedback 
+
+Form - questions - 
+1. Who was the Guest Speaker - Name, Location (varchar 2 fields - enum)
+2. What did you like the most  ?  (like - stringvalue)
+3. Who would you like to invite if you know anybody from past as Guest Speaker ? FGSName 
+4. Did it strengthen your connection with nirankar, how  ?  Boolean - String
+5. 
