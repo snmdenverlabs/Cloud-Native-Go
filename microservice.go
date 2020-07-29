@@ -12,6 +12,7 @@ func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/sessions", api.SessionsHandleFunc)
 	http.HandleFunc("/api/sessions/", api.SessionHandleFunc)
+	http.HandleFunc("/api/echo", api.EchoHandleFunc)
 
 	http.ListenAndServe(port(), nil)
 }

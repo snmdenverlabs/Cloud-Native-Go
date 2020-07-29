@@ -16,13 +16,13 @@ type Session struct {
 }
 
 var sessions = map[string]Session{
-	"07162020-01": Session{ID: "07162020-01", Date: "07/16/2020", Guest: "Rev. Mata Lajwanti Makhijani Ji", GuestWish: "Rev. Nand Ahuja Ji"},
-	"07092020-09": Session{ID: "07092020-09", Date: "07/09/2020", Guest: "Rev. Sudhir Dureja Ji", Comments: "Pure Bliss!"},
+	"07162020-01": Session{ID: "07162020-01", Date: "07/16/2020", Guest: "Rev. Jane Doe", Comments: "Sparked Connection!", GuestWish: "Rev. John Doe"},
+	"07092020-09": Session{ID: "07092020-09", Date: "07/09/2020", Guest: "Rev. John Doe", Comments: "Pure Bliss!"},
 }
 
 // ToJSON to be used for marshalling of Session type
-func (b Session) ToJSON() []byte {
-	ToJSON, err := json.Marshal(b)
+func (s Session) ToJSON() []byte {
+	ToJSON, err := json.Marshal(s)
 	if err != nil {
 		panic(err)
 	}
