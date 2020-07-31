@@ -1,0 +1,24 @@
+Terraform
+    
+k8s Setup on AWS VPC - Private EC2 instances
+    1) Spin up EC2 deploy node through kops - 1 instance & S3 bucket for maintaining k8s config
+        install - kops, kubectl
+    2) Setup k8s cluster through kops on EC2 - t2.micro - 2 intances
+        1 master, 1 worker
+    3) Introduce 5-10 min delay & then run CLI to Verify Setup: kops validate cluster
+
+
+MongoDB setup on AWS 
+    1) Run MongoDB on k8s cluster & verify installation
+    2) Create shell script to instantiate MongoDB using yaml file
+    3) Create DB schema in MongoDB
+    4) Insert S3 records into MongoDB
+
+REST Microservice using GO lang
+    1) CRUD resources results in 4 separate GO files for REST
+    2) Dockerize into separate microservices & upload on docker hub
+    3) Package/Consume docker images into k8s - By writing yaml file
+    4) Deploy docker yaml file on k8s cluster & verify required no. of PODS are running
+    5) Verify REST API calls through Postman
+
+UI Component : TBD
