@@ -2,21 +2,15 @@
 Guru Charcha App
 
 Steps to deploy App:
-Open Terminal or Command Prompt having GIT & Docker installed
+Open Terminal or Command Prompt having GIT installed
 $ git clone https://github.com/snmdenverlabs/Cloud-Native-Go.git
-$ docker-compose up -d
-$ docker ps -a 
-We should now see two running containers one having nginx:1.11.9 and another cloud-native-go:1.0.1-alpine
 
-Steps to Clean Up App:
-$ docker-compose kill
-$ docker-compose rm
+Steps to start GO REST API:
+Change directory to ~/SNMLabs/Cloud-Native-Go/server
+~/SNMLabs/Cloud-Native-Go/server$ mkdir bin
+~/SNMLabs/Cloud-Native-Go/server$ go build -o bin/gSessionMSvc
+~/SNMLabs/Cloud-Native-Go/server$ ./bin/gSessionMSvc
 
-Docker/Docker-Compose commands commonly used:
-$ docker-compose up -d --build
-$ docker ps -a
-$ docker images
-
-Docker Clean Up scripts to start fresh: (Optional steps below, kindly note these commands which will remove all the images & other docker ecosystem objects from local docker deamon)
-$ docker system prune
-$ docker rmi $(docker images -q)
+References
+- https://www.linkedin.com/learning/getting-started-with-cloud-native-go/basic-docker-workflow-and-docker-commands
+- https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging

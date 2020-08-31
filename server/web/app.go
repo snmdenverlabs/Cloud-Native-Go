@@ -1,13 +1,12 @@
 package web
 
 import (
+	"Cloud-Native-Go/api"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-
-	"Cloud-Native-Go/api"
 )
 
 // App with refernce to DB and map of handlers
@@ -21,25 +20,31 @@ func SessionApp(cors bool) App {
 		handlers: make(map[string]http.HandlerFunc),
 	}
 
-	sessionsHandler := api.SessionsHandleFunc;
+	initHandler := api.InitializeHandleFunc
+	if !cors {
+		initHandler = disableCors(initHandler)
+	}
+
+	sessionsHandler := api.SessionsHandleFunc
 	if !cors {
 		sessionsHandler = disableCors(sessionsHandler)
 	}
 
-	sessionHandler := api.SessionHandleFunc;
+	sessionHandler := api.SessionHandleFunc
 	if !cors {
 		sessionHandler = disableCors(sessionHandler)
 	}
 
-	echoHandler := api.EchoHandleFunc;
+	echoHandler := api.EchoHandleFunc
 	if !cors {
 		echoHandler = disableCors(echoHandler)
 	}
 
-	app.handlers["/"] = index;
-	app.handlers["/api/sessions"] = sessionsHandler;
-	app.handlers["/api/sessions/"] = sessionHandler;
-	app.handlers["/api/echo"] = echoHandler;
+	app.handlers["/"] = index
+	app.handlers["/api/init"] = initHandler
+	app.handlers["/api/sessions"] = sessionsHandler
+	app.handlers["/api/sessions/"] = sessionHandler
+	app.handlers["/api/echo"] = echoHandler
 
 	return app
 }

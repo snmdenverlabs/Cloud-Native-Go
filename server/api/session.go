@@ -70,7 +70,7 @@ func SessionsHandleFunc(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusConflict)
 		}
 	case http.MethodOptions:
-		w.WriteHeader(http.StatusOK);
+		w.WriteHeader(http.StatusOK)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Unsupported request method."))
@@ -105,7 +105,7 @@ func SessionHandleFunc(w http.ResponseWriter, r *http.Request) {
 		DeleteSession(id)
 		w.WriteHeader(http.StatusOK)
 	case http.MethodOptions:
-		w.WriteHeader(http.StatusOK);
+		w.WriteHeader(http.StatusOK)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Unsupported request method."))
