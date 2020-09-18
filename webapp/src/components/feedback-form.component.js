@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment'
+import queryString from 'query-string'
 
 import "../styles.css";
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
@@ -15,8 +15,6 @@ export default class FeedBackForm extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeId = this.onChangeId.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeGuestSpeaker = this.onChangeGuestSpeaker.bind(this);
         this.onChangeLikedMost = this.onChangeLikedMost.bind(this);
         this.onChangeWishListGuestSpeaker = this.onChangeWishListGuestSpeaker.bind(this);
@@ -24,33 +22,31 @@ export default class FeedBackForm extends Component {
 
         this.state = {
             id: '',
-            date: null,
+            date: '',
             guestSpeaker: '',
             likedMost: '',
             wishListGuestSpeaker: '',
+            location: ''
         }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:7070/api/sessions/07162020-01')
+        const values = queryString.parse(this.props.location.search)
+        
+        let dateParam = values.date;
+        let locParam = values.loc;
+
+        axios.get("http://localhost:7070/api/init?date="+dateParam+"&loc="+locParam)
             .then(res => {
                 const initializeData = res.data;
                 
                 this.setState({ id: initializeData._id });
-                this.setState({ date: new Date(initializeData.gchurcha_date) });
+                this.setState({ date: initializeData.gchurcha_date });
+                this.setState({ location: initializeData.gcharcha_loc });
 
             }).catch((error) => {
                 console.log(error);
             })
-    }
-
-    onChangeId(e) {
-        this.setState({ id: e.target.value });
-    }
-
-    onChangeDate(selectedDate) {
-        //console.log(moment(selectedDate).format('MMM DD, YYYY'));
-        this.setState({ date: selectedDate });
     }
 
     onChangeGuestSpeaker(e) {
@@ -67,9 +63,12 @@ export default class FeedBackForm extends Component {
 
     onReset(e) {   
        this.setState({
+            id: '',
+            date: '',
             guestSpeaker: '',
             likedMost: '',
-            wishListGuestSpeaker: ''
+            wishListGuestSpeaker: '',
+            location: ''
         })
     }
 
@@ -78,7 +77,7 @@ export default class FeedBackForm extends Component {
 
         const feedbackObject = {
             _id: this.state.id,
-            gchurcha_date: moment(this.state.date).format('MM/DD/YYYY'),
+            gchurcha_date: this.state.date,
             guest_speaker: this.state.guestSpeaker,
             liked_most: this.state.likedMost,
             wish_list_gspeaker: this.state.wishListGuestSpeaker
@@ -111,7 +110,9 @@ export default class FeedBackForm extends Component {
             guestSpeaker: '',
             likedMost: '',
             wishListGuestSpeaker: ''
-        })
+        });
+
+        this.props.history.push('/thankyou');
     }
 
     render() {
@@ -122,18 +123,22 @@ export default class FeedBackForm extends Component {
                         <label>Session ID</label>
                         <input type="text" 
                             value={this.state.id}
-                            onChange={this.onChangeId} />
+                            readOnly />
                     </div>
                     
                     <div className="field">
                         <label>When was the Guru Churcha session held ?</label>
-                        <DateTimePicker 
+                        <input type="text" 
+                            value={this.state.date === '' ? '' : 
+                                    moment(new Date(this.state.date)).format('MMM DD, YYYY')}
+                            readOnly />
+                        { /* <DateTimePicker 
                             value = { this.state.date }
                             format = "MMM DD, YYYY"
                             time = {false}
                             readOnly
                             onChange={this.onChangeDate}
-                        />
+                        /> */ }
                     </div>
                     
                     <div className="field">
